@@ -1,8 +1,10 @@
 # Parkinson's Disease Screening — Drawings + Voice
 
 Two independent PD-vs-healthy classifiers (hand-drawn spirals/waves, and sustained-vowel voice
-recordings), each compared across several models with cross-validation, plus a small app that
+recordings), each compared across several models with cross-validation, small app as a demo that
 combines both into one screening tool.
+
+Limitations : a mouse drawing has a very different stroke texture than a hand-drawn scanned image, so the live-app prediction is more of an illustrative demo of the pipeline.
 
 ## Setup
 
@@ -12,7 +14,7 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Data — you need to download these yourself (not included in the repo)
+## Data 
 
 **Voice** — UCI "Parkinsons" dataset (195 rows, 31 subjects, `class`/`status` column: 1 = PD, 0 = healthy).
 - https://www.kaggle.com/datasets/porinitahoque/parkinsons-disease-pd-data-analysis
@@ -37,8 +39,6 @@ data/drawings/wave/training/parkinson/*.png
 data/drawings/wave/testing/healthy/*.png
 data/drawings/wave/testing/parkinson/*.png
 ```
-(This matches the folder layout the Kaggle dataset ships with. If your download differs, adjust
-`DRAWINGS_DIR` / the glob patterns at the top of `src/drawings_pipeline.py`.)
 
 ## Run
 
@@ -69,7 +69,7 @@ streamlit run src/app.py
   single train/test split would be unreliable at that size.
 - The app's voice feature extraction uses `parselmouth` (a Python wrapper around Praat) to
   approximate jitter/shimmer/HNR from a live recording. These won't be numerically identical to
-  the original MDVP-derived features in the training CSV, so treat the app's voice prediction as
-  a demo, not a clinical-grade measurement — worth saying explicitly in your presentation.
-- These are two **independent** models (drawing-based, voice-based) shown side by side in the
-  app, not a fused multimodal model — there's no patient-level pairing between the two datasets.
+  the original MDVP-derived features in the training CSV (the app's voice prediction is
+  a demo).
+- These are two independent models (drawing-based, voice-based) shown side by side in the
+  app, not a fused multimodal model : there's no patient-level pairing between the two datasets.

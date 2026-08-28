@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/voice/*.csv
+!data/voice/parkinsons.csv
+data/voice/*.numbers
+data/drawings/**
+!data/drawings/.gitkeep
+models/*.joblib
+_tmp_recording.wav
